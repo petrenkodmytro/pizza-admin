@@ -2,9 +2,9 @@ import { CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Admin, DataProvider, Loading, Resource } from "react-admin";
 import buildHasuraProvider from "ra-data-hasura";
-import MenuList from "./modules/menu/menu-list";
-import MenuEdit from "./modules/menu/menu-edit";
-import MenuCreate from "./modules/menu/menu-create";
+import MenuList from "@app/modules/menu/menu-list";
+import MenuEdit from "@app/modules/menu/menu-edit";
+import MenuCreate from "@app/modules/menu/menu-create";
 
 function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider<string> | null>(null);
