@@ -5,6 +5,8 @@ import buildHasuraProvider from "ra-data-hasura";
 import MenuList from "@app/modules/menu/menu-list";
 import MenuEdit from "@app/modules/menu/menu-edit";
 import MenuCreate from "@app/modules/menu/menu-create";
+import authProvider from "@app/core/auth-provider";
+import { apolloClient } from "./core/apollo-clientn";
 
 function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider<string> | null>(null);
@@ -12,7 +14,7 @@ function App() {
   useEffect(() => {
     const buildDataProvider = async () => {
       const dataProvider = await buildHasuraProvider({
-        clientOptions: { uri: "http://localhost:8080/v1/graphql" },
+        client: apolloClient
       });
       setDataProvider(() => dataProvider);
     };
@@ -24,7 +26,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Admin dataProvider={dataProvider}>
+      <Admin dataProvider={dataProvider} authProvider={authProvider} requireAuth>
         <Resource name="menu" list={MenuList} edit={MenuEdit} create={MenuCreate} />
         {/* <Resource name="menu" list={ListGuesser} /> */}
       </Admin>
