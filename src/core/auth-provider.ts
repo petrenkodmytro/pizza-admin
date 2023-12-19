@@ -1,7 +1,8 @@
 // Logi Form for admin
-import { AdminLoginQuery, AdminLoginQueryVariables } from "@app/core/types";
+import { AdminGetMeQuery, AdminLoginQuery, AdminLoginQueryVariables } from "@app/core/types";
 import { apolloClient } from "./apollo-clientn";
 import AdminLoginQueryGql from "@app/core/graphql/admin-login.gql";
+import AdminGetMeQueryGql from "@app/core/graphql/admin-get-me.gql";
 import { JWT_ADMIN_TOKEN } from "./constants";
 
 const authProvider = {
@@ -31,11 +32,14 @@ const authProvider = {
     return Promise.resolve();
   },
 
-  getIdentity: () =>
-    Promise.resolve({
-      id: "user",
-      fullName: "John Doe",
-    }),
+  getIdentity: async () => {
+    const { data } = await apolloClient.query<AdminGetMeQuery>(AdminGetMeQueryGql);
+
+    return Promise.resolve({
+      id: data.adminGetMe!.id,
+      fullName: data.adminGetMe!.username,
+    });
+  },
 
   getPermissions: () => Promise.resolve(""),
 };
