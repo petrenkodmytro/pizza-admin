@@ -29,7 +29,8 @@ function App() {
     <>
       <CssBaseline />
       <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider} theme={theme} requireAuth>
-        <Resource name="menu" list={MenuList} edit={MenuEdit} create={MenuCreate} />
+
+        <Resource name="menu" list={MenuList} edit={MenuEdit} create={MenuCreate} options={{label: 'Меню'}} />
         {/* <Resource name="menu" list={ListGuesser} /> */}
       </Admin>
     </>
