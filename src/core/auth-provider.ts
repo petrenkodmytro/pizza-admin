@@ -16,18 +16,18 @@ const authProvider = {
   },
 
   logout: () => {
-    localStorage.removeItem("username");
+    localStorage.removeItem(JWT_ADMIN_TOKEN);
     return Promise.resolve();
   },
 
-  checkAuth: () => (localStorage.getItem("username") ? Promise.resolve() : Promise.reject()),
-  checkError: (error: any) => {
-    const status = error.status;
-    if (status === 401 || status === 403) {
-      localStorage.removeItem("username");
+  checkAuth: () => {
+    if (!localStorage.getItem(JWT_ADMIN_TOKEN)) {
       return Promise.reject();
     }
-    // other error code (404, 500, etc): no need to log out
+    return Promise.resolve();
+  },
+
+  checkError: (error: any) => {
     return Promise.resolve();
   },
 
