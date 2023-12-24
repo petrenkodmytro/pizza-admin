@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
 import CloudinaryInputUI from "./cloudinary-input-ui";
-import { ThemeProvider } from "@mui/material";
+
 
 const meta: Meta<typeof CloudinaryInputUI> = {
-  <ThemeProvider theme={theme}> component: CloudinaryInputUI</ThemeProvider>
- 
+  component: CloudinaryInputUI,
 };
 
 export default meta;
