@@ -2,7 +2,7 @@ import CloudinaryInput from "@app/common/components/cloudinary-input";
 import { Edit, NumberInput, SimpleForm, TextInput } from "react-admin";
 
 const MenuEdit = () => (
-  <Edit title={"Редагувати товар"}>
+  <Edit title={"Редагувати товар"} mutationMode="pessimistic">
     <SimpleForm>
       <TextInput source="id" disabled fullWidth />
       <TextInput source="title" fullWidth label="Назва" />

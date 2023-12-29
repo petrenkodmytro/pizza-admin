@@ -1,21 +1,21 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import CloudinaryInputUI from "./cloudinary-input-ui";
-import { InputProps, useNotify } from "react-admin";
-import {  useCloudinarySignatureQuery } from "@app/core/types";
+import { InputProps, useInput, useNotify } from "react-admin";
+import { useCloudinarySignatureQuery } from "@app/core/types";
 import axios, { AxiosError } from "axios";
 import { CloudinaryUploadDTO } from "../cloudinary-upload.dto";
-import { useController } from "react-hook-form";
 
-const CloudinaryInput: FC<InputProps> = ({ label, source }) => {
+const CloudinaryInput: FC<InputProps> = (props) => {
+  const { label, source } = props;
   const computedLabel = String(label) ?? source;
 
-  const { data: cloudSignature, loading } = useCloudinarySignatureQuery();
+  const { data: cloudSignature, loading } = useCloudinarySignatureQuery({ fetchPolicy: "network-only" });
 
   const notify = useNotify();
 
   const {
     field: { onChange, value },
-  } = useController({ name: source });
+  } = useInput(props);
 
   const onImageSelected = async (image: File) => {
     // generation link for upload image
@@ -23,6 +23,7 @@ const CloudinaryInput: FC<InputProps> = ({ label, source }) => {
       return;
     }
     const { cloudName, apiKey, publicId, signature, timestamp } = cloudSignature.cloudinarySignature;
+
     const url = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
     const formData = new FormData();
     formData.append("file", image);
@@ -39,7 +40,7 @@ const CloudinaryInput: FC<InputProps> = ({ label, source }) => {
       notify((error as AxiosError).message);
     }
 
-    onChange(data!.public_id);
+    onChange(data!.public_id); // make url with cloudinary
   };
 
   return <CloudinaryInputUI label={computedLabel} value={value} disabled={loading} onImageSelected={onImageSelected} />;
