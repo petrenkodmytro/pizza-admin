@@ -10,3 +10,11 @@ generates:
       - "typescript"
       - "typescript-operations"
       - "typescript-react-apollo"
+
+# https://assuring-kodiak-14.hasura.app/v1/graphql
+# x-hasura-admin-secret - tDOAa0RBqtJii9vU5kGR35S1AnCBHLaw6Kri9Huc8sgvPoL8dznwrYgdZXsrEtCm
+
+# myadminsecretkey
+# http://localhost:8080
+
+# tDOAa0RBqtJii9vU5kGR35S1AnCBHLaw6Kri9Huc8sgvPoL8dznwrYgdZXsrEtCm
