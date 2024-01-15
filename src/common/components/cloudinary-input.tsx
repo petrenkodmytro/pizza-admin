@@ -3,7 +3,7 @@ import CloudinaryInputUI from "./cloudinary-input-ui";
 import { InputProps, useInput, useNotify } from "react-admin";
 import { useCloudinarySignatureQuery } from "@app/core/types";
 import axios, { AxiosError } from "axios";
-import { CloudinaryUploadDTO } from "../cloudinary-upload.dto";
+import { CloudinaryUploadDTO } from "./cloudinary-upload.dto";
 
 const CloudinaryInput: FC<InputProps> = (props) => {
   const { label, source } = props;
