@@ -1,7 +1,7 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-import { JWT_ADMIN_TOKEN } from "./constants";
-import { config } from "./config";
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { JWT_ADMIN_TOKEN } from './constants';
+import { config } from './config';
 
 const httpLink = createHttpLink({ uri: config.hasuraEndpoint });
 // console.log(process.env);
