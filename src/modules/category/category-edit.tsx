@@ -1,7 +1,7 @@
-import { Edit, SimpleForm, TextInput } from "react-admin";
+import { Edit, SimpleForm, TextInput } from 'react-admin';
 
 export const CategoryEdit = () => (
-  <Edit title={"Редагувати категорію"} mutationMode="pessimistic">
+  <Edit title={'Редагувати категорію'} mutationMode="pessimistic">
     <SimpleForm>
       <TextInput source="title" label="Назва" />
       <TextInput source="slug" label="Слаг" />

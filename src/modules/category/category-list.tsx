@@ -1,4 +1,4 @@
-import { Datagrid, FunctionField, List, TextField } from 'react-admin';
+import { Datagrid, List, TextField } from 'react-admin';
 // import { Categories } from '@app/core/types';
 
 export const CategoryList = () => (
