@@ -4,13 +4,20 @@ import {
   FunctionField,
   List,
   ReferenceField,
+  ReferenceInput,
+  SelectInput,
   TextField,
   TextInput,
 } from 'react-admin';
 import MenuListExpand from './menu-list-expand';
 import { Menu } from '@app/core/types';
 
-const filters = [<TextInput source="title" label="Пошук товару" />];
+const filters = [
+  <TextInput source="title" label="Пошук товару" />,
+  <ReferenceInput source="category_id" reference="categories">
+    <SelectInput optionText="title" label="Категорії" />
+  </ReferenceInput>,
+];
 
 const MenuList = () => (
   <List filters={filters}>

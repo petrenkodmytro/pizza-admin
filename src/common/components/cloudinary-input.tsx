@@ -13,6 +13,10 @@ const CloudinaryInput: FC<InputProps> = (props) => {
     fetchPolicy: 'network-only',
   });
 
+  //-----------------------
+  // const { data: settings } = useGetSettingsQuery({ fetchPolicy: 'cache-only' });
+  //------------------ delete
+
   const notify = useNotify();
 
   const {
@@ -46,14 +50,25 @@ const CloudinaryInput: FC<InputProps> = (props) => {
     onChange(data!.public_id); // make url with cloudinary
   };
 
+  // ------------------------
+  // fix size image product
+  // const {
+  //   field: { value: categoryId },
+  // } = useInput({ source: 'category_id' });
+  // const isDrinkCategory = categoryId === settings?.settings[0].drinks_category;
+  //-------------------------- delete
+
   return (
     <CloudinaryInputUI
       label={computedLabel}
       value={value}
       disabled={loading}
       onImageSelected={onImageSelected}
+      // fitImage={isDrinkCategory}
     />
   );
 };
 
 export default CloudinaryInput;
+
+// fitImage={true} - upload original size image
