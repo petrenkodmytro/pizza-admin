@@ -1,6 +1,12 @@
 import { CssBaseline } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Admin, DataProvider, Loading, Resource } from 'react-admin';
+// import { Route } from 'react-router-dom';
+import {
+  Admin,
+  DataProvider,
+  Loading,
+  Resource,
+} from 'react-admin';
 import buildHasuraProvider from 'ra-data-hasura';
 import MenuList from '@app/modules/menu/menu-list';
 import MenuEdit from '@app/modules/menu/menu-edit';
@@ -12,10 +18,12 @@ import { apolloClient } from '@app/core/apollo-clientn';
 import { theme } from '@app/core/theme';
 import { i18nProvider } from '@app/core/i18n';
 import { CategoryCreate } from '@app/modules/category/category-create';
+// import { SettingEdit } from '@app/modules/settings/setting-edit';
+// import { Layout } from '@app/common/components/layout';
 
 function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider<string> | null>(
-    null
+    null,
   );
 
   useEffect(() => {
@@ -39,6 +47,7 @@ function App() {
         i18nProvider={i18nProvider}
         theme={theme}
         requireAuth
+        // layout={Layout} // not nessery
       >
         <Resource
           name="menu"
@@ -55,6 +64,10 @@ function App() {
           create={CategoryCreate}
           options={{ label: 'Категорії' }}
         />
+        {/* <Resource name="settings"/>
+        <CustomRoutes>
+          <Route path="/settings" element={<SettingEdit />} />
+        </CustomRoutes> */}
       </Admin>
     </>
   );

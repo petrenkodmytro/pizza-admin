@@ -24,7 +24,6 @@ const CloudinaryInputUI: FC<CloudinaryInputUIProps> = ({
   disabled,
   onImageSelected,
   value,
-  fitImage,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const onFileInputChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -42,11 +41,13 @@ const CloudinaryInputUI: FC<CloudinaryInputUIProps> = ({
   };
 
   const image = cloudinary.image(value);
-  const transformations = ['w_384', 'h_240', 'dpr_2.0'];
+  const transformations = ['c_auto', 'w_384', 'h_240', 'dpr_2.0'];
 
-  if (fitImage) {
-    transformations.push('c_pad');
-  }
+  // const transformations = ['w_384', 'h_240', 'dpr_2.0'];
+  // fix size image product
+  // if (fitImage) {
+  //   transformations.push('c_pad');
+  // }
 
   image.addTransformation(transformations.join(','));
 
