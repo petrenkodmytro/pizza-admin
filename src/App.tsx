@@ -1,23 +1,21 @@
 import { CssBaseline } from '@mui/material';
 import { useEffect, useState } from 'react';
 // import { Route } from 'react-router-dom';
-import {
-  Admin,
-  DataProvider,
-  Loading,
-  Resource,
-} from 'react-admin';
+import { Admin, DataProvider, Loading, Resource } from 'react-admin';
 import buildHasuraProvider from 'ra-data-hasura';
 import MenuList from '@app/modules/menu/menu-list';
 import MenuEdit from '@app/modules/menu/menu-edit';
 import MenuCreate from '@app/modules/menu/menu-create';
 import { CategoryList } from '@app/modules/category/category-list';
 import { CategoryEdit } from '@app/modules/category/category-edit';
+import { CategoryCreate } from '@app/modules/category/category-create';
 import authProvider from '@app/core/auth-provider';
 import { apolloClient } from '@app/core/apollo-clientn';
 import { theme } from '@app/core/theme';
 import { i18nProvider } from '@app/core/i18n';
-import { CategoryCreate } from '@app/modules/category/category-create';
+import OrderList from '@app/modules/orders/order-list';
+import OrderShow from '@app/modules/orders/order-show';
+import { OrderEdit } from './modules/orders/order-edit';
 // import { SettingEdit } from '@app/modules/settings/setting-edit';
 // import { Layout } from '@app/common/components/layout';
 
@@ -68,6 +66,15 @@ function App() {
         <CustomRoutes>
           <Route path="/settings" element={<SettingEdit />} />
         </CustomRoutes> */}
+        <Resource
+          name="orders"
+          list={OrderList}
+          show={OrderShow}
+          edit={OrderEdit}
+          options={{ label: 'Замовлення' }}
+        />
+        <Resource name="order_status" />
+        <Resource name="order_menu" />
       </Admin>
     </>
   );
