@@ -17,14 +17,14 @@ export const getManyReferenceFilter = {
   },
   sort: {
     field: 'id',
-    order: 'desc',
+    order: 'DESC',
   },
   filter: {},
 };
 
 interface MenuOrderInputProps {}
 
-export const MenuOrderInput: FC<MenuOrderInputProps> = () => {
+const MenuOrderInput: FC<MenuOrderInputProps> = () => {
   const record = useRecordContext();
   const dataProvider = useDataProvider();
   const { setValue } = useFormContext();
@@ -33,25 +33,33 @@ export const MenuOrderInput: FC<MenuOrderInputProps> = () => {
 
   const [joinedEntities, setJoinedEntities] = useState<any[]>([]);
 
-//   useEffect(() => {
-//     if (!record) return;
+  useEffect(() => {
+    if (!record) return;
 
-//     const fetchJoinReferences = async () => {
-//       const entities = await dataProvider.getManyReference('orders_menu', {
-//         id: record.id,
-//         target: 'order_id',
-//         ...getManyReferenceFilter,
-//       });
+    const fetchJoinReferences = async () => {
+      const entities = await dataProvider.getManyReference('orders_menu', {
+        id: record.id,
+        target: 'order_id',
+        pagination: {
+          page: 1,
+          perPage: 100,
+        },
+        sort: {
+          field: 'id',
+          order: 'DESC',
+        },
+        filter: {},
+      });
 
-//       setJoinedEntities(entities.data);
-//     };
+      setJoinedEntities(entities.data);
+    };
 
-//     fetchJoinReferences();
-//   }, []);
+    fetchJoinReferences();
+  }, []);
 
-//   useEffect(() => {
-//     setValue('joined_orders_menu', joinedEntities);
-//   }, [joinedEntities]);
+  useEffect(() => {
+    setValue('joined_orders_menu', joinedEntities);
+  }, [joinedEntities]);
 
   return (
     <ArrayInput source="joined_orders_menu" label="Замовлення">
@@ -69,3 +77,4 @@ export const MenuOrderInput: FC<MenuOrderInputProps> = () => {
     </ArrayInput>
   );
 };
+export default MenuOrderInput;

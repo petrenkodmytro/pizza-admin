@@ -15,7 +15,7 @@ import { theme } from '@app/core/theme';
 import { i18nProvider } from '@app/core/i18n';
 import OrderList from '@app/modules/orders/order-list';
 import OrderShow from '@app/modules/orders/order-show';
-import { OrderEdit } from './modules/orders/order-edit';
+import OrderEdit from './modules/orders/order-edit';
 // import { SettingEdit } from '@app/modules/settings/setting-edit';
 // import { Layout } from '@app/common/components/layout';
 

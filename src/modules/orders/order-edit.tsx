@@ -1,6 +1,7 @@
-// import { MenuOrderInput } from '@app/modules/orders/menu-order-input';
-// import { useMenuOrderInput } from '@app/modules/orders/hooks/use-menu-order-input.hook';
-// import { OrderForm } from '@app/modules/orders/order.types';
+import  MenuOrderInput  from '@app/modules/orders/menu-order-input';
+import { useMenuOrderInput } from '@app/modules/orders/use-menu-order-input.hook';
+import { OrderForm } from '@app/modules/orders/order.types';
+import ManyToManyInput from '@app/common/components/many-to-many-input';
 import {
   Edit,
   ReferenceInput,
@@ -9,21 +10,20 @@ import {
   TextInput,
 } from 'react-admin';
 
-export const OrderEdit = () => {
-  //   const { mutate } = useMenuOrderInput();
+const OrderEdit = () => {
+    const { mutate } = useMenuOrderInput();
 
-  //   const transform = async (data: OrderForm) => {
-  //     await mutate({
-  //       id: data.id,
-  //       newReferences: data.joined_orders_menu,
-  //     });
+    const transform = async (data: OrderForm) => {
+      await mutate({
+        id: data.id,
+        newReferences: data.joined_orders_menu,
+      });
 
-  //     return data;
-  //   };
+      return data;
+    };
 
   return (
-    <Edit mutationMode="pessimistic">
-      {/* transform={transform} */}
+    <Edit mutationMode="pessimistic" transform={transform}>
       <SimpleForm>
         <TextInput source="client_address" label="Адреса" fullWidth />
         <TextInput source="client_name" label="Ім'я" />
@@ -34,8 +34,17 @@ export const OrderEdit = () => {
         <ReferenceInput source="payment_status" reference="payment_status">
           <SelectInput optionText="label" label="Статус оплати" />
         </ReferenceInput>
-        {/* <MenuOrderInput /> */}
+        <ManyToManyInput
+          label="Меню"
+          reference="menu"
+          resource="orders"
+          joinResource="order_menu"
+          resourceField="order_id"
+          referenceField="menu_id"
+        />
+        <MenuOrderInput />
       </SimpleForm>
     </Edit>
   );
 };
+export default OrderEdit
